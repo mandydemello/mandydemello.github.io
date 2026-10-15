@@ -101,7 +101,7 @@ main { overflow-x: clip; }
 .band .eyebrow { color: var(--sage); }
 .band a { color: var(--creme); }
 .impact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.impact-card { background: var(--espresso); display: grid; align-content: start; gap: 12px; padding: 24px 22px; border: 1px solid color-mix(in srgb, var(--creme) 18%, var(--espresso)); border-radius: var(--radius-md); min-width: 0; }
+.impact-card { background: var(--espresso); display: flex; flex-direction: column; gap: 12px; padding: 24px 22px; border: 1px solid color-mix(in srgb, var(--creme) 18%, var(--espresso)); border-radius: var(--radius-md); min-width: 0; }
 .impact-card .product { font-weight: 600; font-size: 15px; }
 .impact-card .num { font-family: var(--font-display); font-weight: 600; color: var(--gold); font-size: clamp(30px, 3vw, 38px); line-height: 1.1; font-variant-numeric: tabular-nums; }
 .impact-card p { font-size: 15px; line-height: 1.55; color: color-mix(in srgb, var(--creme) 88%, var(--espresso)); }
@@ -391,13 +391,15 @@ img.shot { display: block; width: 100%; height: auto; border-radius: var(--radiu
 }
 
 /* Impact cards: progressive disclosure */
-.impact-card .more { border-top: 1px solid color-mix(in srgb, var(--creme) 18%, var(--espresso)); padding-top: 12px; margin-top: 2px; }
-.impact-card .more summary { cursor: pointer; list-style: none; font-size: 14px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); display: flex; justify-content: space-between; align-items: center; min-height: 32px; }
+.impact-card .more { border-top: 1px solid color-mix(in srgb, var(--creme) 18%, var(--espresso)); padding-top: 12px; margin-top: auto; }
+.impact-card .more summary { cursor: pointer; list-style: none; font-size: 14px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); display: flex; justify-content: space-between; align-items: center; min-height: 32px; line-height: 1; text-box: trim-both cap alphabetic; }
 .impact-card .more summary::-webkit-details-marker { display: none; }
-.impact-card .more summary::after { content: "+"; font-size: 22px; line-height: 1; letter-spacing: 0; }
-.impact-card .more[open] summary::after { content: "–"; }
+.impact-card .more summary::after { content: ""; flex: none; width: 14px; height: 14px; background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat; }
+.impact-card .more[open] summary::after { background-size: 100% 2px, 2px 0; }
 .impact-card .more summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
 .impact-card .more p { margin-top: 10px; }
+.impact:has(.more[open]) { align-items: start; }
+.impact:has(.more[open]) .more { margin-top: var(--more-gap); }
 
 /* Hero offer line */
 .hero-copy .offer { font-size: 20px; font-weight: 500; color: var(--sage-deep); line-height: 1.45; max-width: 44ch; }
